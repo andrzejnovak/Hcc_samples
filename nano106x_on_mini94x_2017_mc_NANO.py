@@ -2,7 +2,7 @@
 # using: 
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: nano106x_on_mini94x_2017_mc --mc --eventcontent NANOAODSIM --datatier NANOAODSIM --step NANO --conditions 106X_mc2017_realistic_v7 --era Run2_2017,run2_nanoAOD_94XMiniAODv2 --customise_commands=process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)))\n -n 100 --filein /store/mc/RunIIFall17MiniAODv2/ZJetsToQQ_HT600to800_qc19_4j_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/50000/0A151C42-6FA1-E811-9FBF-0025905C53D2.root --nThreads 4 --customise PhysicsTools/NanoAODJMAR/nano_jmar_cff.JMARnano_customizeMC --no_exec
+# with command line options: nano106x_on_mini94x_2017_mc --mc --eventcontent NANOAODSIM --datatier NANOAODSIM --step NANO --conditions 106X_mc2017_realistic_v7 --era Run2_2017,run2_nanoAOD_94XMiniAODv2 --customise_commands=process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)))\n -n 100 --filein /store/mc/RunIIFall17MiniAODv2/ZJetsToQQ_HT600to800_qc19_4j_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/50000/0A151C42-6FA1-E811-9FBF-0025905C53D2.root --nThreads 4 --customise PhysicsTools/NanoAODJMAR/nano_jmar_cff.JMARnano_customizeMC_noInputs
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run2_2017_cff import Run2_2017
@@ -28,10 +28,7 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring(
-        #'/store/mc/RunIIFall17MiniAODv2/ZJetsToQQ_HT600to800_qc19_4j_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/50000/0A151C42-6FA1-E811-9FBF-0025905C53D2.root'
-        '/store/mc/RunIIFall17MiniAODv2/GluGluHToCC_M-125_13TeV_powheg_MINLO_NNLOPS_pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/260000/1AEFC461-5D4B-E911-8FF5-A4BF0112DD7C.root',
-        ),
+    fileNames = cms.untracked.vstring('/store/mc/RunIIFall17MiniAODv2/ZJetsToQQ_HT600to800_qc19_4j_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/50000/0A151C42-6FA1-E811-9FBF-0025905C53D2.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -89,10 +86,10 @@ from PhysicsTools.NanoAOD.nano_cff import nanoAOD_customizeMC
 process = nanoAOD_customizeMC(process)
 
 # Automatic addition of the customisation function from PhysicsTools.NanoAODJMAR.nano_jmar_cff
-from PhysicsTools.NanoAODJMAR.nano_jmar_cff import JMARnano_customizeMC 
+from PhysicsTools.NanoAODJMAR.nano_jmar_cff import JMARnano_customizeMC_noInputs 
 
-#call to customisation function JMARnano_customizeMC imported from PhysicsTools.NanoAODJMAR.nano_jmar_cff
-process = JMARnano_customizeMC(process)
+#call to customisation function JMARnano_customizeMC_noInputs imported from PhysicsTools.NanoAODJMAR.nano_jmar_cff
+process = JMARnano_customizeMC_noInputs(process)
 
 # End of customisation functions
 
